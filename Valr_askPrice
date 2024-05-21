@@ -1,0 +1,13 @@
+function Valr(coin, base) {
+ 
+  var pair = coin + base
+
+  var url = "https://api.valr.com/v1/public/" + pair + "/marketsummary";
+  var response = UrlFetchApp.fetch(url);
+  var jsonResponse = JSON.parse(response);
+
+  Logger.log(jsonResponse.askPrice);
+
+  return jsonResponse.askPrice;
+  
+}
