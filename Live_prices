@@ -1,0 +1,64 @@
+function getCoinBasePrice(coin, base) {
+
+  // create pair for url with coin name and base currency
+  var pair = coin + "-" + base
+
+  // grab url and parse data to json
+  var url = "https://api.coinbase.com/v2/prices/" + pair + "/buy";
+  var response = UrlFetchApp.fetch(url);
+  var jsonResponse = JSON.parse(response);
+
+  //log jsonResponse.data.amount to ensure correct output
+  Logger.log(jsonResponse.data.amount);
+
+  return jsonResponse.data.amount;
+
+}
+
+function getBinancePrice(coin, base) {
+
+  var pair = coin + base
+
+  // grab url and parse data to json
+  var url = "https://api1.binance.com/api/v3/ticker/24hr?symbol=" + pair;
+  options = {muteHttpExceptions: true};
+  var response = UrlFetchApp.fetch(url, options);
+  var jsonResponse = JSON.parse(response);
+
+  //log jsonResponse.data.amount to ensure correct output
+  Logger.log(jsonResponse.askPrice);
+
+  return jsonResponse.askPrice;
+
+}
+
+
+function getBitstampPrice(coin, base) {
+
+  var coin_lower = coin.toLocaleLowerCase();
+  var base_lower = base.toLocaleLowerCase();
+  var pair = coin_lower + base_lower;
+
+  // grab url and parse data to json
+  var url = "https://www.bitstamp.net/api/v2/ticker/" + pair + "/";
+  options = {muteHttpExceptions: true};
+  var response = UrlFetchApp.fetch(url);
+  var jsonResponse = JSON.parse(response);
+
+  //Logger.log(jsonResponse.ask);
+  return jsonResponse.ask;
+}
+
+function getValrPrice(coin, base) {
+ 
+  var pair = coin + base
+
+  var url = "https://api.valr.com/v1/public/" + pair + "/marketsummary";
+  var response = UrlFetchApp.fetch(url);
+  var jsonResponse = JSON.parse(response);
+
+  Logger.log(jsonResponse.askPrice);
+
+  return jsonResponse.askPrice;
+  
+}
