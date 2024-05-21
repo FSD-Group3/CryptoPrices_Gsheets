@@ -1,0 +1,17 @@
+function getKrakenAskPrice(coin, base) {
+
+  var pair = coin + base;
+
+  // grab url and parse data to json
+  var url = "https://api.kraken.com/0/public/Ticker?pair=" + pair;
+  options = {muteHttpExceptions: true};
+  var response = UrlFetchApp.fetch(url);
+  var jsonResponse = JSON.parse(response);
+
+  // if statements to determine return function based on coin 
+  // Logger.log(jsonResponse.result[pair].a[0])
+  return jsonResponse.result[pair].a[0];
+ 
+}
+
+// Use clasp clone and clasp push to interact with google scripts
